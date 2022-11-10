@@ -66,11 +66,11 @@ RSpec.describe SendReplyJob, type: :job do
       described_class.perform_now(message.id)
     end
 
-    it 'calls ::YcloudChannel:SendOnLineService when its line message' do
+    it 'calls ::Ycloud:SendOnLineService when its line message' do
       ycloud_channel = create(:channel_ycloud)
       message = create(:message, conversation: create(:conversation, inbox: ycloud_channel.inbox))
-      allow(::YcloudChannel::SendOnLineService).to receive(:new).with(message: message).and_return(process_service)
-      expect(::YcloudChannel::SendOnLineService).to receive(:new).with(message: message)
+      allow(::Ycloud::SendOnLineService).to receive(:new).with(message: message).and_return(process_service)
+      expect(::Ycloud::SendOnLineService).to receive(:new).with(message: message)
       expect(process_service).to receive(:perform)
       described_class.perform_now(message.id)
     end

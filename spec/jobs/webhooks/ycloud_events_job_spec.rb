@@ -26,11 +26,11 @@ RSpec.describe Webhooks::YcloudEventsJob, type: :job do
   end
 
   context 'when valid params' do
-    it 'calls YcloudChannel::IncomingMessageService' do
+    it 'calls Ycloud::IncomingMessageService' do
       process_service = double
-      allow(YcloudChannel::IncomingMessageService).to receive(:new).and_return(process_service)
+      allow(Ycloud::IncomingMessageService).to receive(:new).and_return(process_service)
       allow(process_service).to receive(:perform)
-      expect(YcloudChannel::IncomingMessageService).to receive(:new).with(inbox: ycloud_channel.inbox,
+      expect(Ycloud::IncomingMessageService).to receive(:new).with(inbox: ycloud_channel.inbox,
                                                                  params: params['ycloud'].with_indifferent_access)
       expect(process_service).to receive(:perform)
       described_class.perform_now(params: params, post_body: post_body, signature: signature)

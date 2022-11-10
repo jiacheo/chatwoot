@@ -1,4 +1,4 @@
-class YcloudChannel::IncomingMessageService
+class Ycloud::IncomingMessageService
   include ::FileTypeHelper
 
   pattr_initialize [:params!]
@@ -24,9 +24,9 @@ class YcloudChannel::IncomingMessageService
   ##becareful about the params variable, it come from the web request, may be not a key=value style (json obj), we must convert it to ease of use.
 
   def ycloud_channel
-    @ycloud_channel ||= ::Channel::YcloudChannel.find_by(ycloud_channel_id: params[:ycloud_channel_id]) if params[:ycloud_channel_id].present?
+    @ycloud_channel ||= ::Channel::Ycloud.find_by(ycloud_channel_id: params[:ycloud_channel_id]) if params[:ycloud_channel_id].present?
     if params[:to].present?
-      @ycloud_channel ||= ::Channel::YcloudChannel.find_by!(ycloud_channel_id: params[:ycloud_channel_id], phone_number: params[:to])
+      @ycloud_channel ||= ::Channel::Ycloud.find_by!(ycloud_channel_id: params[:ycloud_channel_id], phone_number: params[:to])
     end
     @ycloud_channel
   end

@@ -1,8 +1,8 @@
-class YcloudChannel::SendOnYcloudService < Base::SendOnChannelService
+class Ycloud::SendOnYcloudService < Base::SendOnChannelService
   private
 
   def channel_class
-    Channel::YcloudChannel
+    Channel::Ycloud
   end
 
   def perform_reply

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe YcloudChannel::IncomingMessageService do
+describe Ycloud::IncomingMessageService do
   let!(:ycloud_channel) { create(:channel_ycloud) }
   let(:params) do
     {
