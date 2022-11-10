@@ -1,4 +1,4 @@
-class Twilio::WebhookSetupService
+class Ycloud::WebhookSetupService
   include Rails.application.routes.url_helpers
 
   pattr_initialize [:inbox!]

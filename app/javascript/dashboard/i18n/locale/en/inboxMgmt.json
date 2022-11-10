@@ -151,7 +151,8 @@
         "PROVIDERS": {
           "LABEL": "API Provider",
           "TWILIO": "Twilio",
-          "BANDWIDTH": "Bandwidth"
+          "BANDWIDTH": "Bandwidth",
+          "YCLOUD": "YCloud"
         },
         "API": {
           "ERROR_MESSAGE": "We were not able to save the SMS channel"

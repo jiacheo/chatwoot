@@ -11,6 +11,9 @@
           <option value="twilio">
             {{ $t('INBOX_MGMT.ADD.SMS.PROVIDERS.TWILIO') }}
           </option>
+          <option value="twilio">
+            {{ $t('INBOX_MGMT.ADD.SMS.PROVIDERS.YCLOUD') }}
+          </option>
           <option value="360dialog">
             {{ $t('INBOX_MGMT.ADD.SMS.PROVIDERS.BANDWIDTH') }}
           </option>
@@ -26,16 +29,18 @@
 import PageHeader from '../../SettingsSubPageHeader';
 import BandwidthSms from './BandwidthSms.vue';
 import Twilio from './Twilio';
+import YCloud from './YCloud';
 
 export default {
   components: {
     PageHeader,
     Twilio,
     BandwidthSms,
+    YCloud,
   },
   data() {
     return {
-      provider: 'twilio',
+      provider: 'YCloud',
     };
   },
 };
