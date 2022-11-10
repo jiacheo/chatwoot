@@ -328,6 +328,18 @@ RSpec.describe 'Inboxes API', type: :request do
         expect(response.body).to include('callback_webhook_url')
       end
 
+      it 'creates a ycloud inbox when administrator' do
+        post "/api/v1/accounts/#{account.id}/inboxes",
+             headers: admin.create_new_auth_token,
+             params: { name: 'Line Inbox',
+                       channel: { type: 'ycloud', ycloud_channel_id: SecureRandom.uuid, ycloud_channel_apikey: SecureRandom.uuid } },
+             as: :json
+
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('YCloud Inbox')
+        expect(response.body).to include('callback_webhook_url')
+      end
+
       it 'creates a sms inbox when administrator' do
         post "/api/v1/accounts/#{account.id}/inboxes",
              headers: admin.create_new_auth_token,

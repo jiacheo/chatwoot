@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_17_201914) do
+#20221110032353
+ActiveRecord::Schema.define(version: 2022_11_10_032353) do
+#ActiveRecord::Schema.define(version: 2022_10_17_201914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -276,6 +278,15 @@ ActiveRecord::Schema.define(version: 2022_10_17_201914) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["line_channel_id"], name: "index_channel_line_on_line_channel_id", unique: true
+  end
+
+  create_table "channel_ycloud", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.string "ycloud_channel_id", null: false
+    t.string "ycloud_channel_apikey", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ycloud_channel_id"], name: "index_channel_ycloud_on_ycloud_channel_id", unique: true
   end
 
   create_table "channel_sms", force: :cascade do |t|

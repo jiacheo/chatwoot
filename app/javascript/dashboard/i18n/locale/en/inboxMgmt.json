@@ -204,7 +204,8 @@
           "LABEL": "API Provider",
           "TWILIO": "Twilio",
           "WHATSAPP_CLOUD": "WhatsApp Cloud",
-          "360_DIALOG": "360Dialog"
+          "360_DIALOG": "360Dialog",
+          "YCLOUD": "YCloud"
         },
         "INBOX_NAME": {
           "LABEL": "Inbox Name",
@@ -312,6 +313,31 @@
         "API_CALLBACK": {
           "TITLE": "Callback URL",
           "SUBTITLE": "You have to configure the webhook URL in LINE application with the URL mentioned here."
+        }
+      },
+      "YCLOUD_CHANNEL": {
+        "TITLE": "YCloud Channel",
+        "DESC": "Integrate with YCloud channel and start supporting your customers.",
+        "CHANNEL_NAME": {
+          "LABEL": "Channel Name",
+          "PLACEHOLDER": "Please enter a channel name",
+          "ERROR": "This field is required"
+        },
+        "YCLOUD_CHANNEL_ID": {
+          "LABEL": "YCloud Channel ID",
+          "PLACEHOLDER": "YCloud Channel ID"
+        },
+        "YCLOUD_CHANNEL_APIKEY": {
+          "LABEL": "YCloud Channel APIKEY",
+          "PLACEHOLDER": "Paste your YCloud APIKEY here"
+        },
+        "SUBMIT_BUTTON": "Create YCloud Channel",
+        "API": {
+          "ERROR_MESSAGE": "We were not able to save the YCloud Channel"
+        },
+        "API_CALLBACK": {
+          "TITLE": "Callback URL",
+          "SUBTITLE": "You have to configure the webhook URL in YCloud application with the URL mentioned here."
         }
       },
       "TELEGRAM_CHANNEL": {

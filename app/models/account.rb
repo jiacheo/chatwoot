@@ -63,6 +63,7 @@ class Account < ApplicationRecord
   has_many :inboxes, dependent: :destroy_async
   has_many :labels, dependent: :destroy_async
   has_many :line_channels, dependent: :destroy_async, class_name: '::Channel::Line'
+  has_many :ycloud_channels, dependent: :destroy_async, class_name: '::Channel::YCloudChannel'
   has_many :mentions, dependent: :destroy_async
   has_many :messages, dependent: :destroy_async
   has_many :notes, dependent: :destroy_async

@@ -45,6 +45,13 @@
         </div>
         <div class="medium-6 small-offset-3">
           <woot-code
+            v-if="isAYCloudInbox"
+            lang="html"
+            :script="currentInbox.callback_webhook_url"
+          />
+        </div>
+        <div class="medium-6 small-offset-3">
+          <woot-code
             v-if="isASmsInbox"
             lang="html"
             :script="currentInbox.callback_webhook_url"
@@ -106,6 +113,9 @@ export default {
     isALineInbox() {
       return this.currentInbox.channel_type === 'Channel::Line';
     },
+    isAYCloudInbox() {
+      return this.currentInbox.channel_type === 'Channel::YCloudChannel';
+    },
     isASmsInbox() {
       return this.currentInbox.channel_type === 'Channel::Sms';
     },
@@ -131,6 +141,12 @@ export default {
       if (this.isALineInbox) {
         return `${this.$t('INBOX_MGMT.FINISH.MESSAGE')}. ${this.$t(
           'INBOX_MGMT.ADD.LINE_CHANNEL.API_CALLBACK.SUBTITLE'
+        )}`;
+      }
+
+      if (this.isAYCloudInbox) {
+        return `${this.$t('INBOX_MGMT.FINISH.MESSAGE')}. ${this.$t(
+          'INBOX_MGMG.ADD.YCLOUD_CHANNEL.API_CALLBACK.SUBTITLE'
         )}`;
       }
 

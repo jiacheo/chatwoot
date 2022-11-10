@@ -33,6 +33,10 @@
       src="~dashboard/assets/images/channels/line.png"
     />
     <img
+      v-if="channel.key === 'ycloud'"
+      src="~dashboard/assets/images/channels/ycloud.png"
+    />
+    <img
       v-if="channel.key === 'website'"
       src="~dashboard/assets/images/channels/website.png"
     />
@@ -85,6 +89,7 @@ export default {
         'sms',
         'telegram',
         'line',
+        'ycloud',
       ].includes(key);
     },
   },

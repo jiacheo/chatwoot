@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+#ruby '3.1.2'
 ruby '3.0.4'
 
 ##-- base gems for rails --##
@@ -7,6 +8,9 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~>6.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
 
 ##-- rails application helper gems --##
 gem 'acts-as-taggable-on'
@@ -62,7 +66,7 @@ gem 'barnes'
 
 ##--- gems for authentication & authorization ---##
 gem 'devise'
-gem 'devise-secure_password', '~> 2.0', git: 'https://github.com/chatwoot/devise-secure_password'
+gem 'devise-secure_password', '~> 2.0', git: 'https://github.com/jiacheo/devise-secure_password'
 gem 'devise_token_auth'
 # authorization
 gem 'jwt'
@@ -97,6 +101,7 @@ gem 'scout_apm'
 gem 'sentry-rails', '~> 5.3'
 gem 'sentry-ruby', '~> 5.3'
 gem 'sentry-sidekiq', '~> 5.3'
+gem 'ycloud_api', git: 'https://github.com/jiacheo/ycloud-ruby-sdk'
 
 ##-- background job processing --##
 gem 'sidekiq', '~> 6.4.0'

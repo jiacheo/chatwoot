@@ -66,6 +66,15 @@ RSpec.describe SendReplyJob, type: :job do
       described_class.perform_now(message.id)
     end
 
+    it 'calls ::YCloudChannel:SendOnLineService when its line message' do
+      ycloud_channel = create(:channel_ycloud)
+      message = create(:message, conversation: create(:conversation, inbox: ycloud_channel.inbox))
+      allow(::YcloudChannel::SendOnLineService).to receive(:new).with(message: message).and_return(process_service)
+      expect(::YcloudChannel::SendOnLineService).to receive(:new).with(message: message)
+      expect(process_service).to receive(:perform)
+      described_class.perform_now(message.id)
+    end
+
     it 'calls ::Whatsapp:SendOnWhatsappService when its whatsapp message' do
       stub_request(:post, 'https://waba.360dialog.io/v1/configs/webhook')
       whatsapp_channel = create(:channel_whatsapp, sync_templates: false)
