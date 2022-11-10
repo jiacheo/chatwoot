@@ -1,4 +1,4 @@
-class Webhooks::YCloudEventsJob < ApplicationJob
+class Webhooks::YcloudEventsJob < ApplicationJob
   queue_as :default
 
   def perform(params: {}, signature: '', post_body: '')

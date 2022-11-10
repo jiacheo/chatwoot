@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Webhooks::YCloudEventsJob, type: :job do
+RSpec.describe Webhooks::YcloudEventsJob, type: :job do
   subject(:job) { described_class.perform_later(params: params) }
 
   let!(:ycloud_channel) { create(:channel_ycloud) }

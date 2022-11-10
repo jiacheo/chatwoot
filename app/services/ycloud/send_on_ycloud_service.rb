@@ -1,4 +1,4 @@
-class YcloudChannel::SendOnYCloudService < Base::SendOnChannelService
+class YcloudChannel::SendOnYcloudService < Base::SendOnChannelService
   private
 
   def channel_class
