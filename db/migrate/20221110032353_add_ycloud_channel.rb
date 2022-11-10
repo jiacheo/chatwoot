@@ -1,4 +1,4 @@
-class CreateYcloudChannel < ActiveRecord::Migration[6.1]
+class AddYcloudChannel < ActiveRecord::Migration[6.1]
   def change
     create_table :channel_ycloud do |t|
       t.integer :account_id, null: false
