@@ -114,7 +114,7 @@ export default {
       return this.currentInbox.channel_type === 'Channel::Line';
     },
     isAYCloudInbox() {
-      return this.currentInbox.channel_type === 'Channel::YCloudChannel';
+      return this.currentInbox.channel_type === 'Channel::YcloudChannel';
     },
     isASmsInbox() {
       return this.currentInbox.channel_type === 'Channel::Sms';

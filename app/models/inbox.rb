@@ -102,7 +102,7 @@ class Inbox < ApplicationRecord
   end
 
   def ycloud?
-    channel_type == 'Channel::YCloudChannel'
+    channel_type == 'Channel::YcloudChannel'
   end
 
   def inbox_type
@@ -126,7 +126,7 @@ class Inbox < ApplicationRecord
       "#{ENV.fetch('FRONTEND_URL', nil)}/webhooks/line/#{channel.line_channel_id}"
     when 'Channel::Whatsapp'
       "#{ENV.fetch('FRONTEND_URL', nil)}/webhooks/whatsapp/#{channel.phone_number}"
-    when 'Channel::YCloudChannel'
+    when 'Channel::YcloudChannel'
       "#{ENV.fetch('FRONTEND_URL', nil)}/webhooks/ycloud/#{channel.ycloud_channel_id}"
     end
   end

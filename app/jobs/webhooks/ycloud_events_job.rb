@@ -6,13 +6,13 @@ class Webhooks::YCloudEventsJob < ApplicationJob
     return unless valid_event_payload?
     return unless valid_post_body?(post_body, signature)
 
-    YCloudChannel::IncomingMessageService.new(inbox: @channel.inbox, params: @params['ycloud'].with_indifferent_access).perform
+    YcloudChannel::IncomingMessageService.new(inbox: @channel.inbox, params: @params['ycloud'].with_indifferent_access).perform
   end
 
   private
 
   def valid_event_payload?
-    @channel = Channel::YCloudChannel.find_by(ycloud_channel_id: @params[:ycloud_channel_id]) if @params[:ycloud_channel_id]
+    @channel = Channel::YcloudChannel.find_by(ycloud_channel_id: @params[:ycloud_channel_id]) if @params[:ycloud_channel_id]
   end
 
   # https://ycloud.readme.io/reference/configure-webhooks

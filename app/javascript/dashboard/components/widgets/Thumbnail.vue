@@ -64,7 +64,7 @@
       src="/integrations/channels/badges/line.png"
     />
     <img
-      v-else-if="badge === 'Channel::YCloudChannel'"
+      v-else-if="badge === 'Channel::YcloudChannel'"
       id="badge"
       class="source-badge"
       :style="badgeStyle"

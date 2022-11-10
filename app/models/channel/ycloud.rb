@@ -15,7 +15,7 @@
 #  index_channel_ycloud_on_ycloud_channel_id  (ycloud_channel_id) UNIQUE
 #
 
-class Channel::YCloudChannel < ApplicationRecord
+class Channel::YcloudChannel < ApplicationRecord
   include Channelable
 
   self.table_name = 'channel_ycloud'
