@@ -11,10 +11,10 @@
           <option value="twilio">
             {{ $t('INBOX_MGMT.ADD.SMS.PROVIDERS.TWILIO') }}
           </option>
-          <option value="twilio">
+          <option value="ycloud">
             {{ $t('INBOX_MGMT.ADD.SMS.PROVIDERS.YCLOUD') }}
           </option>
-          <option value="360dialog">
+          <option value="bandwidth">
             {{ $t('INBOX_MGMT.ADD.SMS.PROVIDERS.BANDWIDTH') }}
           </option>
         </select>
