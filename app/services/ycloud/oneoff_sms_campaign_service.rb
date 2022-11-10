@@ -1,8 +1,8 @@
-class Twilio::OneoffSmsCampaignService
+class Ycloud::OneoffSmsCampaignService
   pattr_initialize [:campaign!]
 
   def perform
-    raise "Invalid campaign #{campaign.id}" if campaign.inbox.inbox_type != 'Twilio SMS' || !campaign.one_off?
+    raise "Invalid campaign #{campaign.id}" if campaign.inbox.inbox_type != 'YcloudSms' || !campaign.one_off?
     raise 'Completed Campaign' if campaign.completed?
 
     # marks campaign completed so that other jobs won't pick it up
@@ -22,7 +22,16 @@ class Twilio::OneoffSmsCampaignService
     campaign.account.contacts.tagged_with(audience_labels, any: true).each do |contact|
       next if contact.phone_number.blank?
 
-      channel.send_message(to: contact.phone_number, body: campaign.message)
+      send_message(to: contact.phone_number, content: campaign.message)
+    end
+  end
+
+  def send_message(to:, content:)
+    sms_send_request = YCloudApiClient::SmsSendRequest.new({"to":to, "text": content})
+    begin
+      ycloud_message = channel.client.sms_send(sms_send_request)
+    rescue YCloudApiClient::ApiError => e
+      ChatwootExceptionTracker.new(e, user: message.sender, account: message.account).capture_exception
     end
   end
 end

@@ -60,7 +60,7 @@ RSpec.describe Campaign, type: :model do
       expect(campaign.trigger!).to be_nil
     end
   end
-
+## miss ycloud, need to be filled
   describe 'ensure_correct_campaign_attributes' do
     context 'when Twilio SMS campaign' do
       let!(:twilio_sms) { create(:channel_twilio_sms) }

@@ -45,6 +45,9 @@
                 <span v-if="item.channel_type === 'Channel::TwilioSms'">
                   {{ twilioChannelName(item) }}
                 </span>
+                <span v-if="item.channel_type === 'Channel::Ycloud'">
+                  {{ ycloudChannelName(item) }}
+                </span>
                 <span v-if="item.channel_type === 'Channel::Whatsapp'">
                   Whatsapp
                 </span>
@@ -182,6 +185,11 @@ export default {
       const { medium = '' } = item;
       if (medium === 'whatsapp') return 'WhatsApp';
       return 'Twilio SMS';
+    },
+    ycloudChannelName(item) {
+      const { medium = '' } = item;
+      if (medium === 'whatsapp') return 'WhatsApp';
+      return 'Ycloud SMS';
     },
     openSettings(inbox) {
       this.showSettings = true;
