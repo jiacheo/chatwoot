@@ -46,8 +46,6 @@ import alertMixin from 'shared/mixins/alertMixin';
 import { required } from 'vuelidate/lib/validators';
 import router from '../../../../index';
 
-const shouldStartWithPlusSign = (value = '') => value.startsWith('+');
-
 export default {
   mixins: [alertMixin],
   props: {
