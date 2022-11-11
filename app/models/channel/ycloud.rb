@@ -4,7 +4,6 @@
 #
 #  id                  :bigint           not null, primary key
 #  ycloud_channel_apikey :string           not null
-#  ycloud_channel_token  :string           not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  account_id          :integer          not null
