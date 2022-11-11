@@ -5,6 +5,7 @@ import InboxesAPI from '../../api/inboxes';
 import WebChannel from '../../api/channel/webChannel';
 import FBChannel from '../../api/channel/fbChannel';
 import TwilioChannel from '../../api/channel/twilioChannel';
+import YcloudChannel from '../../api/channel/ycloudChannel';
 import { throwErrorMessage } from '../utils/api';
 
 const buildInboxData = inboxParams => {
@@ -150,6 +151,18 @@ export const actions = {
     } catch (error) {
       commit(types.default.SET_INBOXES_UI_FLAG, { isCreating: false });
       return throwErrorMessage(error);
+    }
+  },
+  createYcloudChannel: async ({ commit }, params) => {
+    try {
+      commit(types.default.SET_INBOXES_UI_FLAG, { isCreating: true });
+      const response = await YcloudChannel.create(params);
+      commit(types.default.ADD_INBOXES, response.data);
+      commit(types.default.SET_INBOXES_UI_FLAG, { isCreating: false });
+      return response.data;
+    } catch (error) {
+      commit(types.default.SET_INBOXES_UI_FLAG, { isCreating: false });
+      throw new Error(error);
     }
   },
   createTwilioChannel: async ({ commit }, params) => {

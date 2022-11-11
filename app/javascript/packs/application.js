@@ -43,6 +43,9 @@ import { domPurifyConfig } from '../shared/helpers/HTMLSanitizer';
 
 Vue.config.env = process.env;
 
+/* open vue devtool. */
+Vue.config.devtools = true;
+
 if (window.errorLoggingConfig) {
   Sentry.init({
     Vue,
