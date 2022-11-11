@@ -1,63 +1,43 @@
+<!-- Deprecated in favour of separate files for SMS and Whatsapp and also to implement new providers for each platform in the future-->
 <template>
-  <div class="wizard-body small-9 columns">
-    <page-header
-      :header-title="$t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.TITLE')"
-      :header-content="$t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.DESC')"
-    />
-    <form class="row" @submit.prevent="createChannel()">
-      <div class="medium-8 columns">
-        <label :class="{ error: $v.channelName.$error }">
-          {{ $t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.CHANNEL_NAME.LABEL') }}
-          <input
-            v-model.trim="channelName"
-            type="text"
-            :placeholder="
-              $t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.CHANNEL_NAME.PLACEHOLDER')
-            "
-            @blur="$v.channelName.$touch"
-          />
-          <span v-if="$v.channelName.$error" class="message">{{
-            $t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.CHANNEL_NAME.ERROR')
-          }}</span>
-        </label>
-      </div>
-
-      <div class="medium-8 columns">
-        <label :class="{ error: $v.ycloudChannelId.$error }">
-          {{ $t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.YCLOUD_CHANNEL_ID.LABEL') }}
-          <input
-            v-model.trim="ycloudChannelId"
-            type="text"
-            :placeholder="
-              $t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.YCLOUD_CHANNEL_ID.PLACEHOLDER')
-            "
-            @blur="$v.ycloudChannelId.$touch"
-          />
-        </label>
-      </div>
-
-      <div class="medium-8 columns">
-        <label :class="{ error: $v.ycloudChannelSecret.$error }">
-          {{ $t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.YCLOUD_CHANNEL_APIKEY.LABEL') }}
-          <input
-            v-model.trim="ycloudChannelApikey"
-            type="text"
-            :placeholder="
-              $t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.YCLOUD_CHANNEL_APIKEY.PLACEHOLDER')
-            "
-            @blur="$v.ycloudChannelApikey.$touch"
-          />
-        </label>
-      </div>
-
-      <div class="medium-12 columns">
-        <woot-submit-button
-          :loading="uiFlags.isCreating"
-          :button-text="$t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.SUBMIT_BUTTON')"
+  <form class="row" @submit.prevent="createChannel()">
+    <div class="medium-8 columns">
+      <label :class="{ error: $v.channelName.$error }">
+        {{ $t('INBOX_MGMT.ADD.YCLOUD.CHANNEL_NAME.LABEL') }}
+        <input
+          v-model.trim="channelName"
+          type="text"
+          :placeholder="$t('INBOX_MGMT.ADD.YCLOUD.CHANNEL_NAME.PLACEHOLDER')"
+          @blur="$v.channelName.$touch"
         />
-      </div>
-    </form>
-  </div>
+        <span v-if="$v.channelName.$error" class="message">{{
+          $t('INBOX_MGMT.ADD.YCLOUD.CHANNEL_NAME.ERROR')
+        }}</span>
+      </label>
+    </div>
+
+    <div class="medium-8 columns">
+      <label :class="{ error: $v.apikey.$error }">
+        {{ $t('INBOX_MGMT.ADD.YCLOUD.YCLOUD_CHANNEL_APIKEY.LABEL') }}
+        <input
+          v-model.trim="apikey"
+          type="text"
+          :placeholder="$t('INBOX_MGMT.ADD.YCLOUD.YCLOUD_CHANNEL_APIKEY.PLACEHOLDER')"
+          @blur="$v.apikey.$touch"
+        />
+        <span v-if="$v.apikey.$error" class="message">{{
+          $t('INBOX_MGMT.ADD.YCLOUD.YCLOUD_CHANNEL_APIKEY.ERROR')
+        }}</span>
+      </label>
+    </div>
+
+    <div class="medium-12 columns">
+      <woot-submit-button
+        :loading="uiFlags.isCreating"
+        :button-text="$t('INBOX_MGMT.ADD.YCLOUD.SUBMIT_BUTTON')"
+      />
+    </div>
+  </form>
 </template>
 
 <script>
@@ -65,18 +45,22 @@ import { mapGetters } from 'vuex';
 import alertMixin from 'shared/mixins/alertMixin';
 import { required } from 'vuelidate/lib/validators';
 import router from '../../../../index';
-import PageHeader from '../../SettingsSubPageHeader';
+
+const shouldStartWithPlusSign = (value = '') => value.startsWith('+');
 
 export default {
-  components: {
-    PageHeader,
-  },
   mixins: [alertMixin],
+  props: {
+    type: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
-      channelName: '',
-      ycloudChannelId: '',
-      ycloudChannelApikey: '',
+      apikey: '',
+      medium: this.type,
+      channelName: 'ycloud',
     };
   },
   computed: {
@@ -84,10 +68,19 @@ export default {
       uiFlags: 'inboxes/getUIFlags',
     }),
   },
-  validations: {
-    channelName: { required },
-    ycloudChannelId: { required },
-    ycloudChannelApikey: { required },
+  validations() {
+    if (this.phoneNumber) {
+      return {
+        channelName: { required },
+        apikey: { required },
+        medium: { required },
+      };
+    }
+    return {
+      channelName: { required },
+      apikey: { required },
+      medium: { required },
+    };
   },
   methods: {
     async createChannel() {
@@ -98,13 +91,12 @@ export default {
 
       try {
         const ycloudChannel = await this.$store.dispatch(
-          'inboxes/createChannel',
+          'inboxes/createYcloudChannel',
           {
-            name: this.channelName,
-            channel: {
-              type: 'ycloud',
-              ycloud_channel_id: this.ycloudChannelId,
-              ycloud_channel_apikey: this.ycloudChannelApikey,
+            ycloud_channel: {
+              name: this.channelName,
+              medium: this.medium,
+              apikey: this.apikey,
             },
           }
         );
@@ -117,11 +109,19 @@ export default {
           },
         });
       } catch (error) {
-        this.showAlert(
-          this.$t('INBOX_MGMT.ADD.YCLOUD_CHANNEL.API.ERROR_MESSAGE')
-        );
+        this.showAlert(this.$t('INBOX_MGMT.ADD.YCLOUD.API.ERROR_MESSAGE'));
       }
     },
   },
 };
 </script>
+<style lang="scss" scoped>
+.messagingServiceHelptext {
+  margin-top: -10px;
+  margin-bottom: 15px;
+
+  .checkbox {
+    margin: 0px 4px;
+  }
+}
+</style>
