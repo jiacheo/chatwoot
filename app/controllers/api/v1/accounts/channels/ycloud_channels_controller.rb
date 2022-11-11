@@ -18,7 +18,7 @@ class Api::V1::Accounts::Channels::YcloudChannelsController < Api::V1::Accounts:
   end
 
   def authenticate_ycloud
-    Rails.logger.info("the permitted_params are :" + permitted_params)
+    Rails.logger.info("the permitted_params are :" + permitted_params.to_s)
     YCloudApiClient.configure do |config|
       config.api_key['api_key'] = permitted_params[:apikey]
     end
