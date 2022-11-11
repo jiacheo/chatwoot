@@ -18,13 +18,13 @@ class Api::V1::Accounts::Channels::YcloudChannelsController < Api::V1::Accounts:
   end
 
   def authenticate_ycloud
+    Rails.logger.info("the permitted_params are :" + permitted_params)
     YCloudApiClient.configure do |config|
-      config.api_key['api_key'] = permitted_params['apikey']
+      config.api_key['api_key'] = permitted_params[:apikey]
     end
     api_instance = YCloudApiClient::BalanceApi.new
     api_instance.balance_retrieve
     #see what the permitted_params.
-    permitted_params
   end
 
   def setup_webhooks
