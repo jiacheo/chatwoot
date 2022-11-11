@@ -21,6 +21,7 @@
       </label>
     </div>
     <twilio v-if="provider === 'twilio'" type="sms" />
+    <ycloud v-else-if="provider === 'ycloud'" type="sms" />
     <bandwidth-sms v-else />
   </div>
 </template>
