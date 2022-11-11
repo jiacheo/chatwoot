@@ -35,6 +35,7 @@ class Api::V1::Accounts::Channels::YcloudChannelsController < Api::V1::Accounts:
   def build_inbox
     @ycloud_channel = Current.account.ycloud_channels.create!(
       ycloud_channel_apikey: permitted_params[:apikey],
+      ycloud_channel_id: permitted_params[:name],
       account_id: permitted_params[:account_id]
     )
     @inbox = Current.account.inboxes.create!(
