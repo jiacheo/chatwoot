@@ -28,7 +28,7 @@
 
 <script>
 import PageHeader from '../../SettingsSubPageHeader';
-import ycloud from './Ycloud';
+import ycloud from './YCloud.vue';
 import BandwidthSms from './BandwidthSms.vue';
 import Twilio from './Twilio';
 
@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      provider: 'ycloud',
+      provider: 'twilio',
     };
   },
 };
