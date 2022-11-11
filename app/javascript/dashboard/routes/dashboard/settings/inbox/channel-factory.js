@@ -6,7 +6,7 @@ import Email from './channels/Email';
 import Sms from './channels/Sms';
 import Whatsapp from './channels/Whatsapp';
 import Line from './channels/Line';
-import YCloud from './channels/YCloud';
+import Ycloud from './channels/Ycloud.vue';
 import Telegram from './channels/Telegram';
 
 const channelViewList = {
@@ -19,7 +19,7 @@ const channelViewList = {
   whatsapp: Whatsapp,
   line: Line,
   telegram: Telegram,
-  ycloud: YCloud,
+  ycloud: Ycloud,
 };
 
 export default {
