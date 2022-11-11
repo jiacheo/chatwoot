@@ -6,7 +6,7 @@ import Email from './channels/Email';
 import Sms from './channels/Sms';
 import Whatsapp from './channels/Whatsapp';
 import Line from './channels/Line';
-import Ycloud from './channels/Ycloud.vue';
+import Ycloud from './channels/YCloud.vue';
 import Telegram from './channels/Telegram';
 
 const channelViewList = {
