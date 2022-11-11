@@ -23,6 +23,8 @@ class Api::V1::Accounts::Channels::YcloudChannelsController < Api::V1::Accounts:
     end
     api_instance = YCloudApiClient::BalanceApi.new
     api_instance.balance_retrieve
+    #see what the permitted_params.
+    permitted_params
   end
 
   def setup_webhooks
