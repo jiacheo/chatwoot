@@ -44,7 +44,7 @@ class Api::V1::Accounts::Channels::YcloudChannelsController < Api::V1::Accounts:
 
   def permitted_params
     params.require(:ycloud_channel).permit(
-      :account_id, :ycloud_channel_id,  :ycloud_channel_apikey, :name
+      :account_id, :channel_id,  :apikey, :name
     )
   end
 end
