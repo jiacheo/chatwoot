@@ -21,14 +21,14 @@
       </label>
     </div>
     <twilio v-if="provider === 'twilio'" type="sms" />
-    <ycloud v-else-if="provider === 'ycloud'" type="sms" />
+    <YCloud v-else-if="provider === 'ycloud'" type="sms" />
     <bandwidth-sms v-else />
   </div>
 </template>
 
 <script>
 import PageHeader from '../../SettingsSubPageHeader';
-import Ycloud from './YCloud.vue';
+import YCloud from './YCloud.vue';
 import BandwidthSms from './BandwidthSms.vue';
 import Twilio from './Twilio';
 
@@ -37,7 +37,7 @@ export default {
     PageHeader,
     Twilio,
     BandwidthSms,
-    Ycloud,
+    YCloud,
   },
   data() {
     return {
