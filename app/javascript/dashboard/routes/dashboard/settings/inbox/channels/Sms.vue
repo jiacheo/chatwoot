@@ -30,7 +30,7 @@
 import PageHeader from '../../SettingsSubPageHeader';
 import BandwidthSms from './BandwidthSms.vue';
 import Twilio from './Twilio';
-import YCloud from './YCloud';
+import YCloud from './YCloud.vue';
 
 export default {
   components: {
