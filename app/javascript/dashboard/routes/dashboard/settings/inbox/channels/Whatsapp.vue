@@ -26,6 +26,7 @@
 
     <twilio v-if="provider === 'twilio'" type="whatsapp" />
     <three-sixty-dialog-whatsapp v-else-if="provider === '360dialog'" />
+    <ycloud-whatsapp v-else-if="provider === 'whatsapp_ycloud'" />
     <cloud-whatsapp v-else />
   </div>
 </template>
@@ -35,6 +36,7 @@ import PageHeader from '../../SettingsSubPageHeader';
 import Twilio from './Twilio';
 import ThreeSixtyDialogWhatsapp from './360DialogWhatsapp';
 import CloudWhatsapp from './CloudWhatsapp';
+import YcloudWhatsapp from './YcloudWhatsapp';
 
 export default {
   components: {
@@ -42,10 +44,11 @@ export default {
     Twilio,
     ThreeSixtyDialogWhatsapp,
     CloudWhatsapp,
+    YcloudWhatsapp,
   },
   data() {
     return {
-      provider: 'whatsapp_cloud',
+      provider: 'whatsapp_ycloud',
     };
   },
 };
