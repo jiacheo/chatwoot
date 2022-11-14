@@ -204,7 +204,8 @@
           "LABEL": "API Provider",
           "TWILIO": "Twilio",
           "WHATSAPP_CLOUD": "WhatsApp Cloud",
-          "360_DIALOG": "Διάλογος 360"
+          "360_DIALOG": "Διάλογος 360",
+          "WHATSAPP_YCLOUD": "YCloud"
         },
         "INBOX_NAME": {
           "LABEL": "Όνομα Κιβωτίου",

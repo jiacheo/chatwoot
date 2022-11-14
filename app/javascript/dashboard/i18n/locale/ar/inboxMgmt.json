@@ -204,7 +204,8 @@
           "LABEL": "API Provider",
           "TWILIO": "تويليو",
           "WHATSAPP_CLOUD": "واتساب السحابة",
-          "360_DIALOG": "360dialog"
+          "360_DIALOG": "360dialog",
+          "WHATSAPP_YCLOUD": "YCloud"
         },
         "INBOX_NAME": {
           "LABEL": "اسم صندوق الوارد لقناة التواصل",

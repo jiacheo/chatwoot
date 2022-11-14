@@ -204,7 +204,8 @@
           "LABEL": "Nhà cung cấp API",
           "TWILIO": "Twilio",
           "WHATSAPP_CLOUD": "Đám mây WhatsApp",
-          "360_DIALOG": "360Dialog"
+          "360_DIALOG": "360Dialog",
+          "WHATSAPP_YCLOUD": "YCloud"
         },
         "INBOX_NAME": {
           "LABEL": "Tên hộp thư đến",

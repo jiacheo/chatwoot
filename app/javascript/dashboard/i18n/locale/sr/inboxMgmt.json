@@ -204,7 +204,8 @@
           "LABEL": "API provajder",
           "TWILIO": "Twilio",
           "WHATSAPP_CLOUD": "WhatsApp oblak",
-          "360_DIALOG": "360Dialog"
+          "360_DIALOG": "360Dialog",
+          "WHATSAPP_YCLOUD": "YCloud"
         },
         "INBOX_NAME": {
           "LABEL": "Naziv prijemnog sandučeta",

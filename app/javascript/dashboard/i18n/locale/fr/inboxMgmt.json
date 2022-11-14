@@ -204,7 +204,8 @@
           "LABEL": "API Provider",
           "TWILIO": "Twilio",
           "WHATSAPP_CLOUD": "WhatsApp Cloud",
-          "360_DIALOG": "Fenêtre de dialogue 360"
+          "360_DIALOG": "Fenêtre de dialogue 360",
+          "WHATSAPP_YCLOUD": "YCloud"
         },
         "INBOX_NAME": {
           "LABEL": "Nom de la boîte de réception",

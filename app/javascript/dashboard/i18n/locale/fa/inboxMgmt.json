@@ -204,7 +204,8 @@
           "LABEL": "ارائه دهنده API",
           "TWILIO": "Twilio",
           "WHATSAPP_CLOUD": "واتس‌اپ ابری",
-          "360_DIALOG": "360Dialog"
+          "360_DIALOG": "360Dialog",
+          "WHATSAPP_YCLOUD": "YCloud"
         },
         "INBOX_NAME": {
           "LABEL": "عنوان صندوق ورودی",
