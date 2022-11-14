@@ -38,7 +38,7 @@ class Channel::Whatsapp < ApplicationRecord
   end
 
   def provider_service
-    provider = whatsapp_channel.provider
+    provider = @provider
     Rails.logger.info("provider_service is " + provider)
     if provider == 'whatsapp_cloud'
       Whatsapp::Providers::WhatsappCloudService.new(whatsapp_channel: self)
