@@ -6,11 +6,14 @@ class Whatsapp::IncomingMessageBaseService
 
   def perform
     processed_params
+    Rails.logger.info("whatsapp inbound message params:" + @processed_params.to_s)
 
     set_contact
+    Rails.logger.info("whatsapp inbound message contact:" + @contact.inspect + ", contact_inbox:" + @contact_inbox.inspect)
     return unless @contact
 
     set_conversation
+    Rails.logger.info("whatsapp inbound message conversation:" + @conversation.inspect)
 
     return if @processed_params[:messages].blank? || unprocessable_message_type?
 
@@ -22,8 +25,12 @@ class Whatsapp::IncomingMessageBaseService
       sender: @contact,
       source_id: @processed_params[:messages].first[:id].to_s
     )
+    Rails.logger.info("whatsapp inbound message message:" + @message.inspect)
     attach_files
-    @message.save!
+    Rails.logger.info("whatsapp inbound message attached_files?:" + @message.inspect)
+    res = @message.save!
+    Rails.logger.info("whatsapp inbound message message_saved?:" + @message.inspect + ", res:" + res.inspect)
+    res
   end
 
   private
