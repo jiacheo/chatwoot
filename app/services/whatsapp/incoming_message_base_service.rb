@@ -6,8 +6,6 @@ class Whatsapp::IncomingMessageBaseService
 
   def perform
     processed_params
-    Rails.logger.info("whatsapp inbound message inbox:" + @inbox.inspect)
-    Rails.logger.info("whatsapp inbound message params:" + @processed_params.inspect)
     set_contact
     Rails.logger.info("whatsapp inbound message contact:" + @contact.inspect + ", contact_inbox:" + @contact_inbox.inspect)
     return unless @contact
@@ -52,13 +50,13 @@ class Whatsapp::IncomingMessageBaseService
   end
 
   def set_contact
-    contact_params = @processed_params[:contacts]&.first
+    contact_params = @processed_params[:whatsappInboundMessage]&.first
     return if contact_params.blank?
 
     contact_inbox = ::ContactInboxWithContactBuilder.new(
-      source_id: contact_params[:wa_id],
+      source_id: contact_params[:wabaId],
       inbox: inbox,
-      contact_attributes: { name: contact_params.dig(:profile, :name), phone_number: "+#{@processed_params[:messages].first[:from]}" }
+      contact_attributes: { name: contact_params.dig(:customerProfile, :name), phone_number: "#{@processed_params[:messages].first[:from]}" }
     ).perform
 
     @contact_inbox = contact_inbox
