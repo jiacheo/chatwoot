@@ -88,6 +88,7 @@ export default {
       inboxName: '',
       phoneNumber: '',
       apiKey: '',
+      webhookVerifyToken: '',
     };
   },
   computed: {
@@ -97,6 +98,7 @@ export default {
     inboxName: { required },
     phoneNumber: { required, shouldStartWithPlusSign },
     apiKey: { required },
+    webhookVerifyToken: { required },
   },
   methods: {
     async createChannel() {
