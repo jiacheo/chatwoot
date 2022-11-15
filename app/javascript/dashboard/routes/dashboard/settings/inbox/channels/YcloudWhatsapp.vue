@@ -93,8 +93,8 @@ export default {
           'inboxes/createChannel',
           {
             name: this.inboxName,
-            provider: 'whatsapp_ycloud',
             channel: {
+              provider: 'whatsapp_ycloud',
               type: 'whatsapp',
               phone_number: this.phoneNumber,
               provider_config: {
