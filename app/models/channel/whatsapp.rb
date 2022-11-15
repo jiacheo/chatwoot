@@ -65,7 +65,6 @@ class Channel::Whatsapp < ApplicationRecord
   end
 
   def validate_provider_config
-    Rails.logger.info("which provider?" + provider_service.inspect.to_s)
     errors.add(:provider_config, 'Invalid Credentials') unless provider_service.validate_provider_config?
   end
 end
