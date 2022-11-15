@@ -56,7 +56,7 @@ class Whatsapp::IncomingMessageBaseService
     Rails.logger.info("contact_params:" + contact_params.inspect)
 
     contact_inbox = ::ContactInboxWithContactBuilder.new(
-      source_id: contact_params[:wabaId],
+      source_id: "#{contact_params[:wabaId]}",
       inbox: inbox,
       contact_attributes: { name: contact_params.dig(:customerProfile, :name), phone_number: "#{@processed_params[:messages].first[:from]}" }
     ).perform
