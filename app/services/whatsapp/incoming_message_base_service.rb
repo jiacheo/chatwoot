@@ -50,8 +50,10 @@ class Whatsapp::IncomingMessageBaseService
   end
 
   def set_contact
-    contact_params = @processed_params[:whatsappInboundMessage]&.first
+    contact_params = @processed_params[:whatsappInboundMessage]
     return if contact_params.blank?
+
+    Rails.logger.info("contact_params:" + contact_params.inspect)
 
     contact_inbox = ::ContactInboxWithContactBuilder.new(
       source_id: contact_params[:wabaId],
