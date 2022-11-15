@@ -30,7 +30,7 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
 
   def validate_provider_config?
     response = HTTParty.get("#{api_base_path}/templates", headers: api_headers)
-    Rails.logger.warn("request ycloud api, response:" + response.to_json.to_s)
+    Rails.logger.info("request ycloud api, response:" + response.inspect.to_s)
     response.success?
   end
 

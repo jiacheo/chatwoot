@@ -41,7 +41,7 @@ class Channel::Whatsapp < ApplicationRecord
     Rails.logger.info("what's this class? " + self.inspect.to_s)
     if provider == 'whatsapp_cloud'
       Whatsapp::Providers::WhatsappCloudService.new(whatsapp_channel: self)
-    elsif provider == 'whatapp_ycloud'
+    elsif provider == 'whatsapp_ycloud'
       Whatsapp::Providers::WhatsappYcloudService.new(whatsapp_channel: self)  
     else
       Whatsapp::Providers::Whatsapp360DialogService.new(whatsapp_channel: self)
@@ -65,6 +65,7 @@ class Channel::Whatsapp < ApplicationRecord
   end
 
   def validate_provider_config
+    Rails.logger.info("which provider?" + provider_service.inspect.to_s)
     errors.add(:provider_config, 'Invalid Credentials') unless provider_service.validate_provider_config?
   end
 end
