@@ -6,8 +6,8 @@ class Whatsapp::IncomingMessageBaseService
 
   def perform
     processed_params
-    Rails.logger.info("whatsapp inbound message params:" + @processed_params.to_s)
-
+    Rails.logger.info("whatsapp inbound message inbox:" + @inbox.inspect)
+    Rails.logger.info("whatsapp inbound message params:" + @processed_params.inspect)
     set_contact
     Rails.logger.info("whatsapp inbound message contact:" + @contact.inspect + ", contact_inbox:" + @contact_inbox.inspect)
     return unless @contact
