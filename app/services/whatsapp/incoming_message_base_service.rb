@@ -116,6 +116,14 @@ class Whatsapp::IncomingMessageBaseService
   end
 
   def download_attachment_file(attachment_payload)
-    Down.download(inbox.channel.media_url(attachment_payload[:id]), headers: inbox.channel.api_headers)
+    Rails.logger.info("what's the attachment_payload look like?" + attachment_payload.inspect)
+    attach_type = attachment_payload[:type]
+    download_url = ""
+    if attach_type
+      download_url = attachment_payload[attach_type.to_sym][:link]
+    else 
+      download_url = inbox.channel.media_url(attachment_payload[:id])
+    end
+    Down.download(, headers: inbox.channel.api_headers)
   end
 end

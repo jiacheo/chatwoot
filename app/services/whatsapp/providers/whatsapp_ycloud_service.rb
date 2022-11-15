@@ -38,7 +38,10 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
     response.success?
   end
 
-
+  # dont need this
+  def media_url(media_id)
+    ""
+  end
 
   def api_headers
     { 'X-API-Key' => "#{whatsapp_channel.provider_config['api_key']}", 'Content-Type' => 'application/json' }
