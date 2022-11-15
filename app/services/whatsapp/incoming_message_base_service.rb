@@ -124,6 +124,6 @@ class Whatsapp::IncomingMessageBaseService
     else 
       download_url = inbox.channel.media_url(attachment_payload[:id])
     end
-    Down.download(, headers: inbox.channel.api_headers)
+    Down.download(download_url, headers: inbox.channel.api_headers)
   end
 end
