@@ -1,12 +1,16 @@
 source 'https://rubygems.org'
 
 ruby '3.0.4'
+#ruby '3.1.2'
 
 ##-- base gems for rails --##
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~>6.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
 
 ##-- rails application helper gems --##
 gem 'acts-as-taggable-on'
@@ -47,7 +51,7 @@ gem 'image_processing', '~> 1.12.2'
 ##-- gems for database --#
 gem 'groupdate'
 gem 'pg'
-gem 'redis'
+gem 'redis', '~> 4.8.0'
 gem 'redis-namespace'
 # super fast record imports in bulk
 gem 'activerecord-import'
