@@ -47,6 +47,23 @@
       </label>
     </div>
 
+    <div class="medium-8 columns">
+      <label :class="{ error: $v.webhookVerifyToken.$error }">
+        <span>
+          YCloud Webhook Verify Token:
+        </span>
+        <input
+          v-model.trim="webhookVerifyToken"
+          type="text"
+          placeholder="input the YCloud webhookVerifyToken"
+          @blur="$v.webhookVerifyToken.$touch"
+        />
+        <span v-if="$v.webhookVerifyToken.$error" class="message">
+          The Webhook Verify Token could not be empty
+        </span>
+      </label>
+    </div>
+
     <div class="medium-12 columns">
       <woot-submit-button
         :loading="uiFlags.isCreating"
@@ -99,6 +116,7 @@ export default {
               phone_number: this.phoneNumber,
               provider_config: {
                 api_key: this.apiKey,
+                webhook_verify_token: this.webhookVerifyToken,
               },
             },
           }
