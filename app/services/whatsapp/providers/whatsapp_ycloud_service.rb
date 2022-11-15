@@ -1,5 +1,8 @@
 class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseService
+
+  
   def send_message(phone_number, message)
+    phone_number = to_ycloud_phone_number(phone_number)
     if message.attachments.present?
       send_attachment_message(phone_number, message)
     else
@@ -8,6 +11,7 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
   end
 
   def send_template(phone_number, template_info)
+    phone_number = to_ycloud_phone_number(phone_number)
     response = HTTParty.post(
       "#{api_base_path}/messages",
       headers: api_headers,
@@ -34,11 +38,22 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
     response.success?
   end
 
+
+
   def api_headers
     { 'X-API-Key' => "#{whatsapp_channel.provider_config['api_key']}", 'Content-Type' => 'application/json' }
   end
 
+  YCLOUD_PHONE_NUMBER_REGEX = Regexp.new('^\+\d{1,15}\z')
+
   private
+
+  def to_ycloud_phone_number(phone_number)
+    return phone_number if YCLOUD_PHONE_NUMBER_REGEX.match(phone_number)
+    contact_inbox = ContactInbox.find_by(source_id: phone_number)
+    return phone_number if contact_inbox.blank?
+    return contact_inbox.contact.phone_number
+  end
 
   def api_base_path
     "https://api.ycloud.com/v2/whatsapp"
@@ -60,6 +75,7 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
   end
 
   def send_attachment_message(phone_number, message)
+    
     attachment = message.attachments.first
     type = %w[image audio video].include?(attachment.file_type) ? attachment.file_type : 'document'
     attachment_url = attachment.download_url
