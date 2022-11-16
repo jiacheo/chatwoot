@@ -52,7 +52,7 @@ class Whatsapp::IncomingMessageBaseService
     return if contact_params.blank?
 
     #ycloud style
-    source_id = contact_params[:wabaId]
+    source_id = contact_params[:from]
 
     #other style
     source_id ||=contact_params[:wa_id]
