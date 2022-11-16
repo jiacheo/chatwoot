@@ -28,8 +28,28 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
   end
 
   def sync_templates
-    response = HTTParty.get("#{api_base_path}/templates", headers: api_headers)
-    whatsapp_channel.update(message_templates: response['items'], message_templates_last_updated: Time.now.utc) if response.success?
+    header = api_headers
+    page_size = 100
+    page_no = 1
+    templates=[]
+    # fetch all template, and filter the APPROVED ones
+    loop do
+      response = HTTParty.get("#{api_base_path}/templates?page=#{page_no}&limit=#{page_size}", headers: header)
+      size = 0
+      if response.success?
+        templates << response[:items]
+        size = response['items'].size
+      end
+      if size < page_size
+        break;
+      end
+      page_no += 1
+    end
+    templates = templates.flatten(1)
+    templates = templates.select do |tmpl|
+      tmpl[:status] == 'APPROVED'
+    end
+    whatsapp_channel.update(message_templates: templates, message_templates_last_updated: Time.now.utc) if response.success?
   end
 
   def validate_provider_config?

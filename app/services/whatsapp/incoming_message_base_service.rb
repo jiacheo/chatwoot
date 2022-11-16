@@ -4,14 +4,13 @@
 class Whatsapp::IncomingMessageBaseService
   pattr_initialize [:inbox!, :params!]
 
+  #TODO migrate this code outof the BaseService, because this impl ycloud only
   def perform
     processed_params
     set_contact
-    Rails.logger.info("whatsapp inbound message contact:" + @contact.inspect + ", contact_inbox:" + @contact_inbox.inspect)
     return unless @contact
 
     set_conversation
-    Rails.logger.info("whatsapp inbound message conversation:" + @conversation.inspect)
 
     return if @processed_params[:messages].blank? || unprocessable_message_type?
 
@@ -52,8 +51,6 @@ class Whatsapp::IncomingMessageBaseService
   def set_contact
     contact_params = @processed_params[:whatsappInboundMessage]
     return if contact_params.blank?
-
-    Rails.logger.info("contact_params:" + contact_params.inspect)
 
     contact_inbox = ::ContactInboxWithContactBuilder.new(
       source_id: "#{contact_params[:wabaId]}",
