@@ -37,17 +37,15 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
       response = HTTParty.get("#{api_base_path}/templates?page=#{page_no}&limit=#{page_size}", headers: header)
       size = 0
       if response.success?
-        templates << response[:items]
+        templates << response['items']
         size = response['items'].size
       end
-      if size < page_size
-        break;
-      end
+      break if size < page_size
       page_no += 1
     end
     templates = templates.flatten(1)
     templates = templates.select do |tmpl|
-      tmpl[:status] == 'APPROVED'
+      tmpl['status'] == 'APPROVED'
     end
     whatsapp_channel.update(message_templates: templates, message_templates_last_updated: Time.now.utc) if response.success?
   end

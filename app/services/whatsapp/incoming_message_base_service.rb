@@ -11,7 +11,6 @@ class Whatsapp::IncomingMessageBaseService
     return unless @contact
 
     set_conversation
-
     return if @processed_params[:messages].blank? || unprocessable_message_type?
 
     @message = @conversation.messages.build(
@@ -22,11 +21,8 @@ class Whatsapp::IncomingMessageBaseService
       sender: @contact,
       source_id: @processed_params[:messages].first[:id].to_s
     )
-    Rails.logger.info("whatsapp inbound message message:" + @message.inspect)
     attach_files
-    Rails.logger.info("whatsapp inbound message attached_files?:" + @message.inspect)
     res = @message.save!
-    Rails.logger.info("whatsapp inbound message message_saved?:" + @message.inspect + ", res:" + res.inspect)
     res
   end
 
@@ -49,11 +45,20 @@ class Whatsapp::IncomingMessageBaseService
   end
 
   def set_contact
+    #ycloud style
     contact_params = @processed_params[:whatsappInboundMessage]
+    #other style
+    contact_params ||= @processed_params[:contacts]&.first
     return if contact_params.blank?
 
+    #ycloud style
+    source_id = contact_params[:wabaId]
+
+    #other style
+    source_id ||=contact_params[:wa_id]
+
     contact_inbox = ::ContactInboxWithContactBuilder.new(
-      source_id: "#{contact_params[:wabaId]}",
+      source_id: source_id,
       inbox: inbox,
       contact_attributes: { name: contact_params.dig(:customerProfile, :name), phone_number: "#{@processed_params[:messages].first[:from]}" }
     ).perform
@@ -113,11 +118,10 @@ class Whatsapp::IncomingMessageBaseService
   end
 
   def download_attachment_file(attachment_payload)
-    Rails.logger.info("what's the attachment_payload look like?" + attachment_payload.inspect)
-    download_url = attachment_payload[:link]
-    if download_url.blank?
+    download_url = attachment_payload[:link] #ycloud style
+    if download_url.blank? #other style
       download_url = inbox.channel.media_url(attachment_payload[:id])
-    end
+    end 
     Down.download(download_url, headers: inbox.channel.api_headers)
   end
 end
