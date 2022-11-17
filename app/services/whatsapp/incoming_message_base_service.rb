@@ -57,6 +57,12 @@ class Whatsapp::IncomingMessageBaseService
     #other style
     source_id ||=contact_params[:wa_id]
 
+    #remove + to unify the source_id of whatsapp
+    if source_id.start_with?('+')
+      source_id = source_id.slice(1, source_id.length)
+    end
+
+    ContactInbox
     contact_inbox = ::ContactInboxWithContactBuilder.new(
       source_id: source_id,
       inbox: inbox,
