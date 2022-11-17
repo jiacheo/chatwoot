@@ -351,6 +351,11 @@ export const AUTOMATION_ACTION_TYPES = [
     inputType: 'multi_select',
   },
   {
+    key: 'add_label_to_contact',
+    label: 'Add a label to contact',
+    inputType: 'multi_select',
+  },
+  {
     key: 'send_email_to_team',
     label: 'Send an email to team',
     inputType: 'team_message',

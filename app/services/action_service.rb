@@ -25,6 +25,11 @@ class ActionService
     @conversation.add_labels(labels)
   end
 
+  def add_label_to_contact(labels)
+    return if labels.empty?
+    @conversation.contact.add_labels(labels)
+  end
+
   def assign_best_agent(agent_ids = [])
     return unless agent_belongs_to_account?(agent_ids)
 

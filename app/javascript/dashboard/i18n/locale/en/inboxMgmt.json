@@ -658,7 +658,7 @@
         "USER_MESSAGE": "Hi",
         "AGENT_MESSAGE": "Hello"
       },
-      "BRANDING_TEXT": "Powered by Chatwoot",
+      "BRANDING_TEXT": "Powered by YCloud",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
     }
   }
