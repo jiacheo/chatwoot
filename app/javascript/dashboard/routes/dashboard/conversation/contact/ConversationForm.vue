@@ -305,6 +305,13 @@ export default {
     },
     async onSendWhatsAppReply(messagePayload) {
       const payload = this.prepareWhatsAppMessagePayload(messagePayload);
+      if (payload.templateParams) {
+        payload.additionalAttributes.templateParams = payload.templateParams;
+      }
+      if (payload.message.templateParams) {
+        payload.message.additionalAttributes.templateParams =
+          payload.message.templateParams;
+      }
       await this.createConversation(payload);
     },
   },
