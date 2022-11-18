@@ -40,7 +40,7 @@ import {
 import FluentIcon from 'shared/components/FluentIcon/DashboardIcon';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
 import { domPurifyConfig } from '../shared/helpers/HTMLSanitizer';
-
+Vue.config.devtools = true;
 Vue.config.env = process.env;
 
 if (window.errorLoggingConfig) {
