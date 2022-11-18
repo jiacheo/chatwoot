@@ -261,18 +261,18 @@ export default {
         this.message = message;
       }, 50);
     },
-    prepareWhatsAppMessagePayload({ message: content, templateParams }) {
+    prepareWhatsAppMessagePayload({ message: content, additionalAttributes }) {
       Console.warn(
         'prepareWhatsAppMessagePayload called:' +
           message +
           ', templateParams=' +
-          templateParams
+          additionalAttributes
       );
       const payload = {
         inboxId: this.targetInbox.inbox.id,
         sourceId: this.targetInbox.source_id,
         contactId: this.contact.id,
-        message: { content, additionalAttributes: { templateParams } },
+        message: { content, additionalAttributes },
         assigneeId: this.currentUser.id,
       };
       return payload;
@@ -312,13 +312,6 @@ export default {
     },
     async onSendWhatsAppReply(messagePayload) {
       const payload = this.prepareWhatsAppMessagePayload(messagePayload);
-      if (payload.templateParams) {
-        payload.additionalAttributes.templateParams = payload.templateParams;
-      }
-      if (payload.message.templateParams) {
-        payload.message.additionalAttributes.templateParams =
-          payload.message.templateParams;
-      }
       await this.createConversation(payload);
     },
   },
