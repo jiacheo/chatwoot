@@ -47,10 +47,6 @@ export default {
       this.selectedWaTemplate = null;
     },
     onSendMessage(message) {
-      let a = true;
-      if (a) {
-        throw new Error(message);
-      }
       this.$emit('on-send', message);
     },
     onClose() {

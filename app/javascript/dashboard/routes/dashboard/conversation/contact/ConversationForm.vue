@@ -133,7 +133,6 @@ import { INBOX_TYPES } from 'shared/mixins/inboxMixin';
 import { ExceptionWithMessage } from 'shared/helpers/CustomErrors';
 import { required, requiredIf } from 'vuelidate/lib/validators';
 import { Console } from 'console';
-import message from '../../../../api/inbox/message';
 
 export default {
   components: {
@@ -262,12 +261,6 @@ export default {
       }, 50);
     },
     prepareWhatsAppMessagePayload({ message: content, additionalAttributes }) {
-      Console.warn(
-        'prepareWhatsAppMessagePayload called:' +
-          message +
-          ', templateParams=' +
-          additionalAttributes
-      );
       const payload = {
         inboxId: this.targetInbox.inbox.id,
         sourceId: this.targetInbox.source_id,

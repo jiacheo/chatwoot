@@ -33,6 +33,16 @@ export const actions = {
       assigneeId,
     } = params;
     try {
+      // handle messages from contact detail.
+      if (message.additionalAttributes) {
+        if (message.additionalAttributes.templateParams) {
+          message.additionalAttributes.template_params =
+            message.additionalAttributes.templateParams;
+          delete message.additionalAttributes.templateParams;
+        }
+        message.additional_attributes = message.additionalAttributes;
+        delete message.additionalAttributes;
+      }
       const { data } = await ConversationApi.create({
         inbox_id: inboxId,
         contact_id: contactId,

@@ -22,9 +22,16 @@ class Api::V1::Accounts::ConversationsController < Api::V1::Accounts::BaseContro
     @conversations_count = result[:count]
   end
 
+  def create_or_getlast_conversation
+    @conversation = @contact_inbox.conversations.last
+    return if @conversation
+    @conversation = ::Conversation.create!(conversation_params)
+  end
+
   def create
     ActiveRecord::Base.transaction do
-      @conversation = ::Conversation.create!(conversation_params)
+      # @conversation = ::Conversation.create!(conversation_params)
+      create_or_getlast_conversation
       Messages::MessageBuilder.new(Current.user, @conversation, params[:message]).perform if params[:message].present?
     end
   end
