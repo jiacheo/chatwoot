@@ -47,10 +47,10 @@ export default {
       this.selectedWaTemplate = null;
     },
     onSendMessage(message) {
-      let a = 1;
-      let b = 0;
-      let c = a / b;
-      console.log(c);
+      let a = true;
+      if (a) {
+        throw new Error(message);
+      }
       this.$emit('on-send', message);
     },
     onClose() {
