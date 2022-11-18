@@ -62,7 +62,6 @@ class Whatsapp::IncomingMessageBaseService
       source_id = source_id.slice(1, source_id.length)
     end
 
-    ContactInbox
     contact_inbox = ::ContactInboxWithContactBuilder.new(
       source_id: source_id,
       inbox: inbox,
