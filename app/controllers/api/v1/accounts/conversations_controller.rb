@@ -22,8 +22,10 @@ class Api::V1::Accounts::ConversationsController < Api::V1::Accounts::BaseContro
     @conversations_count = result[:count]
   end
 
-  def create_or_getlast_conversation
-    @conversation = @contact_inbox.conversations.last
+  def create_or_getlast_unresolved_conversation
+    @conversation = @contact_inbox.conversations.select do |conv|
+      conv.status != 'resolved'
+    end.last
     return if @conversation
     @conversation = ::Conversation.create!(conversation_params)
   end
@@ -31,7 +33,7 @@ class Api::V1::Accounts::ConversationsController < Api::V1::Accounts::BaseContro
   def create
     ActiveRecord::Base.transaction do
       # @conversation = ::Conversation.create!(conversation_params)
-      create_or_getlast_conversation
+      create_or_getlast_unresolved_conversation
       Messages::MessageBuilder.new(Current.user, @conversation, params[:message]).perform if params[:message].present?
     end
   end
