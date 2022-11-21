@@ -30,12 +30,55 @@ class Whatsapp::SendOnWhatsappService < Base::SendOnChannelService
 
   def processable_channel_message_template
     if template_params.present?
+      #the parameters' order from javascript is not original sorted, must be sorted again here 
+      tempalte_name = template_params['name']
+      template_lang = template_params['language'];
+      template_variables = []
+      channel.message_templates&.each do |template|
+        if template['name'] == tempalte_name && template['language'] == template_lang
+          text = template['components'][0]['text']
+          keywords = find_keywords_in_templates(text)
+          keywords.each do |word|
+            template_variables << template_params['processed_params'][word]
+          end
+          break
+        end
+      end
       return [
         template_params['name'],
         template_params['namespace'],
         template_params['language'],
-        template_params['processed_params'].map { |_, value| { type: 'text', text: value } }
+        template_variables.map { |val| {type: 'text', text: template_params['processed_params'][val]} }
       ]
+    end
+
+    def find_keywords_in_templates str
+      word_list = []
+      first_match = second_match = third_match = last_match = false
+      str.each_char do |ch|
+        if ch == '{' && first_match == false
+          first_match = true
+        elsif ch == '{' && first_match == true
+          econd_match = true
+        end
+        if ch != '{' && first_match && second_match && ch != '}'
+          word << ch
+        end
+        if ch == '}' && third_match == false
+          third_match = true
+        elsif ch == '}' && third_match = true
+          last_match = true
+        end
+        if third_match && last_match
+          word_list << word if word.length > 0
+          word = ""
+          first_match = false
+          second_match = false
+          third_match = false
+          last_match = false
+        end
+      end
+      word_list
     end
 
     # Delete the following logic once the update for template_params is stable
