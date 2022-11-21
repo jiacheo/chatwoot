@@ -132,7 +132,6 @@ import alertMixin from 'shared/mixins/alertMixin';
 import { INBOX_TYPES } from 'shared/mixins/inboxMixin';
 import { ExceptionWithMessage } from 'shared/helpers/CustomErrors';
 import { required, requiredIf } from 'vuelidate/lib/validators';
-import { Console } from 'console';
 
 export default {
   components: {
@@ -280,7 +279,6 @@ export default {
     async createConversation(payload) {
       try {
         const data = await this.onSubmit(payload);
-        Console.log('data' + data);
         const action = {
           type: 'link',
           to: `/app/accounts/${data.account_id}/conversations/${data.id}`,
