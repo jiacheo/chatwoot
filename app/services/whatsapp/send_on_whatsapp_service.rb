@@ -48,7 +48,7 @@ class Whatsapp::SendOnWhatsappService < Base::SendOnChannelService
         template_params['name'],
         template_params['namespace'],
         template_params['language'],
-        template_variables.map { |val| {type: 'text', text: template_params['processed_params'][val]} }
+        template_variables.map { |val| {type: 'text', text: val} }
       ]
     end
     # Delete the following logic once the update for template_params is stable
@@ -77,7 +77,7 @@ class Whatsapp::SendOnWhatsappService < Base::SendOnChannelService
       if ch == '{' && first_match == false
         first_match = true
       elsif ch == '{' && first_match == true
-        econd_match = true
+        second_match = true
       end
       if ch != '{' && first_match && second_match && ch != '}'
         word << ch
