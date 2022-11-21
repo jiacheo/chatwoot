@@ -118,8 +118,7 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
 
   def process_response(response)
     if response.success?
-      Rails.logger.info("what's the response look like? " + response.inspect)
-      response[:id]
+      response['id']
     else
       Rails.logger.error response.body
       nil
