@@ -51,6 +51,22 @@ class Whatsapp::SendOnWhatsappService < Base::SendOnChannelService
         template_variables.map { |val| {type: 'text', text: template_params['processed_params'][val]} }
       ]
     end
+    # Delete the following logic once the update for template_params is stable
+    # see if we can match the message content to a template
+    # An example template may look like "Your package has been shipped. It will be delivered in {{1}} business days.
+    # We want to iterate over these templates with our message body and see if we can fit it to any of the templates
+    # Then we use regex to parse the template varibles and convert them into the proper payload
+    channel.message_templates&.each do |template|
+      match_obj = template_match_object(template)
+      next if match_obj.blank?
+
+      # we have a match, now we need to parse the template variables and convert them into the wa recommended format
+      processed_parameters = match_obj.captures.map { |x| { type: 'text', text: x } }
+
+      # no need to look up further end the search
+      return [template['name'], template['namespace'], template['language'], processed_parameters]
+    end
+    [nil, nil, nil, nil]
   end
 
   def find_keywords_in_templates(str)
@@ -80,24 +96,6 @@ class Whatsapp::SendOnWhatsappService < Base::SendOnChannelService
       end
     end
     word_list
-  end
-
-    # Delete the following logic once the update for template_params is stable
-    # see if we can match the message content to a template
-    # An example template may look like "Your package has been shipped. It will be delivered in {{1}} business days.
-    # We want to iterate over these templates with our message body and see if we can fit it to any of the templates
-    # Then we use regex to parse the template varibles and convert them into the proper payload
-    channel.message_templates&.each do |template|
-      match_obj = template_match_object(template)
-      next if match_obj.blank?
-
-      # we have a match, now we need to parse the template variables and convert them into the wa recommended format
-      processed_parameters = match_obj.captures.map { |x| { type: 'text', text: x } }
-
-      # no need to look up further end the search
-      return [template['name'], template['namespace'], template['language'], processed_parameters]
-    end
-    [nil, nil, nil, nil]
   end
 
   def template_match_object(template)
