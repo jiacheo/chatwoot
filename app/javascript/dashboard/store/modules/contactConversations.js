@@ -43,6 +43,12 @@ export const actions = {
         message.additional_attributes = message.additionalAttributes;
         delete message.additionalAttributes;
       }
+
+      if (message.templateParams) {
+        message.template_params = message.templateParams;
+        delete message.templateParams;
+      }
+
       const { data } = await ConversationApi.create({
         inbox_id: inboxId,
         contact_id: contactId,

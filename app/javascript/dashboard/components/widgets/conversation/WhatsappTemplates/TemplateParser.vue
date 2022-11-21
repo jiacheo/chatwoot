@@ -90,14 +90,12 @@ export default {
       if (this.$v.$invalid) return;
       const payload = {
         message: this.processedString,
-        additionalAttributes: {
-          templateParams: {
-            name: this.template.name,
-            category: this.template.category,
-            language: this.template.language,
-            namespace: this.template.namespace,
-            processed_params: this.processedParams,
-          },
+        templateParams: {
+          name: this.template.name,
+          category: this.template.category,
+          language: this.template.language,
+          namespace: this.template.namespace,
+          processed_params: this.processedParams,
         },
       };
       this.$emit('sendMessage', payload);
