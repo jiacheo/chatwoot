@@ -72,6 +72,7 @@ class Whatsapp::SendOnWhatsappService < Base::SendOnChannelService
   def find_keywords_in_templates(str)
     word_list = []
     first_match = second_match = third_match = last_match = false
+    word = ""
     str.each_char do |ch|
       if ch == '{' && first_match == false
         first_match = true
