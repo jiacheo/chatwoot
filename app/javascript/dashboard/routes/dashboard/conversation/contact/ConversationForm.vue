@@ -260,12 +260,12 @@ export default {
         this.message = message;
       }, 50);
     },
-    prepareWhatsAppMessagePayload({ message: content, additionalAttributes }) {
+    prepareWhatsAppMessagePayload({ message: content, templateParams }) {
       const payload = {
         inboxId: this.targetInbox.inbox.id,
         sourceId: this.targetInbox.source_id,
         contactId: this.contact.id,
-        message: { content, additionalAttributes },
+        message: { content, template_params: templateParams },
         assigneeId: this.currentUser.id,
       };
       return payload;
