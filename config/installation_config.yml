@@ -1,17 +1,17 @@
 # if you dont specify locked attribute, the default value will be true
 # which means the particular config will be locked
 - name: INSTALLATION_NAME
-  value: 'YCloud Desk'
+  value: 'YCloud Inbox'
 - name: LOGO_THUMBNAIL
   value: '/brand-assets/logo_thumbnail.svg'
 - name: LOGO
   value: '/brand-assets/logo.svg'
 - name: BRAND_URL
-  value: 'https://desk.ycloud.com'
+  value: 'https://inbox.ycloud.com'
 - name: WIDGET_BRAND_URL
-  value: 'https://desk.ycloud.com'
+  value: 'https://inbox.ycloud.com'
 - name: BRAND_NAME
-  value: 'YCloud Desk'
+  value: 'YCloud Inbox'
 - name: TERMS_URL
   value: 'https://www.ycloud.com/terms-service'
 - name: PRIVACY_URL

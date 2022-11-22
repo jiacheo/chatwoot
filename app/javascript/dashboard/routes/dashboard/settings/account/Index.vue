@@ -21,6 +21,7 @@
               {{ $t('GENERAL_SETTINGS.FORM.NAME.ERROR') }}
             </span>
           </label>
+          <!--
           <label :class="{ error: $v.locale.$error }">
             {{ $t('GENERAL_SETTINGS.FORM.LANGUAGE.LABEL') }}
             <select v-model="locale">
@@ -36,6 +37,7 @@
               {{ $t('GENERAL_SETTINGS.FORM.LANGUAGE.ERROR') }}
             </span>
           </label>
+          -->
           <label v-if="featureInboundEmailEnabled">
             {{ $t('GENERAL_SETTINGS.FORM.FEATURES.INBOUND_EMAIL_ENABLED') }}
           </label>
@@ -78,7 +80,6 @@
           </label>
         </div>
       </div>
-
       <div class="profile--settings--row row">
         <div class="columns small-3">
           <h4 class="block-title">

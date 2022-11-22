@@ -97,6 +97,7 @@
     </div>
     <change-password v-if="!globalConfig.disableUserProfileUpdate" />
     <notification-settings />
+    <!--
     <div class="profile--settings--row row">
       <div class="columns small-3">
         <h4 class="block-title">
@@ -115,6 +116,7 @@
         <woot-code :script="currentUser.access_token" />
       </div>
     </div>
+    -->
   </div>
 </template>
 
