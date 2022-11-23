@@ -141,14 +141,6 @@ const settings = accountId => ({
       toStateName: 'settings_applications',
       featureFlag: FEATURE_FLAGS.INTEGRATIONS,
     },
-    {
-      icon: 'credit-card-person',
-      label: 'BILLING',
-      hasSubMenu: false,
-      toState: frontendURL(`accounts/${accountId}/settings/billing`),
-      toStateName: 'billing_settings_index',
-      showOnlyOnCloud: true,
-    },
   ],
 });
 

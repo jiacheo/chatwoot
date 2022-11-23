@@ -26,14 +26,6 @@ const primaryMenuItems = accountId => [
     roles: ['administrator'],
   },
   {
-    icon: 'megaphone',
-    key: 'campaigns',
-    label: 'CAMPAIGNS',
-    toState: frontendURL(`accounts/${accountId}/campaigns`),
-    toStateName: 'settings_account_campaigns',
-    roles: ['administrator'],
-  },
-  {
     icon: 'library',
     key: 'helpcenter',
     label: 'HELP_CENTER.TITLE',
