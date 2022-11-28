@@ -57,7 +57,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   #config.active_job.queue_adapter = :inline
-  config.active_job.queue_adapter = :async
+  config.active_job.queue_adapter = :sidekiq
   # config.active_job.queue_name_prefix = "Chatwoot_#{Rails.env}"
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
