@@ -4,10 +4,10 @@ class ConversationReplyEmailWorker
   sidekiq_options queue: :mailers
 
   def perform(conversation_id, last_queued_id)
-    do
+    begin
       @conversation = Conversation.find(conversation_id)
-    rescue
-      Rails.logger.info("conversation not found :" + conversation_id)
+    rescue => error
+      Rails.logger.info("conversation not found :" + conversation_id.to_s + ", msg:" + error.message.to_s)
       return
     end
     # send the email
