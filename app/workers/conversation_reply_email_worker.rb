@@ -4,8 +4,12 @@ class ConversationReplyEmailWorker
   sidekiq_options queue: :mailers
 
   def perform(conversation_id, last_queued_id)
-    @conversation = Conversation.find(conversation_id)
-
+    do
+      @conversation = Conversation.find(conversation_id)
+    rescue
+      Rails.logger.info("conversation not found :" + conversation_id)
+      return
+    end
     # send the email
     if @conversation.messages.incoming&.last&.content_type == 'incoming_email'
       ConversationReplyMailer.with(account: @conversation.account).reply_without_summary(@conversation, last_queued_id).deliver_later
@@ -20,7 +24,8 @@ class ConversationReplyEmailWorker
   private
 
   def email_inbox?
-    @conversation.inbox&.inbox_type == 'Email'
+    return @conversation.inbox&.inbox_type == 'Email' if @conversation
+    return false
   end
 
   def conversation_mail_key
