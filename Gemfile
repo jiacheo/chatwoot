@@ -51,7 +51,7 @@ gem 'image_processing', '~> 1.12.2'
 ##-- gems for database --#
 gem 'groupdate'
 gem 'pg'
-gem 'redis', '~> 4.8.0'
+gem 'redis', '~> 4.7.0'
 gem 'redis-namespace'
 # super fast record imports in bulk
 gem 'activerecord-import'
