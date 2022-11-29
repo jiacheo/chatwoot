@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@braid/vue-formulate": "^2.5.2",
-    "@chatwoot/prosemirror-schema": "https://github.com/jiacheo/prosemirror-schema.git",
+    "@chatwoot/prosemirror-schema": "https://git.taovip.com/ycloud-app/prosemirror-schema.git",
     "@chatwoot/utils": "^0.0.10",
     "@hcaptcha/vue-hcaptcha": "^0.3.2",
     "@rails/actioncable": "6.1.3",

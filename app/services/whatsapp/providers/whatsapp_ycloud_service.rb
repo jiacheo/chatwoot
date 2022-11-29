@@ -1,6 +1,6 @@
 class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseService
 
-  
+
   def send_message(phone_number, message)
     if message.attachments.present?
       send_attachment_message(phone_number, message)
@@ -49,12 +49,13 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
     templates = templates.select do |tmpl|
       tmpl['status'] == 'APPROVED'
     end
+    #todo we must ensure the same set of templates for the same wabaid
     whatsapp_channel.update(message_templates: templates, message_templates_last_updated: Time.now.utc) if success
   end
 
   def validate_provider_config?
     response = HTTParty.get("#{api_base_path}/templates", headers: api_headers)
-    Rails.logger.info("request ycloud api, response:" + response.inspect.to_s)
+    #Rails.logger.info("request ycloud api, response:" + response.inspect.to_s)
     response.success?
   end
 
@@ -71,7 +72,7 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
 
   private
 
-  
+
 
   def api_base_path
     "https://api.ycloud.com/v2/whatsapp"
@@ -93,7 +94,7 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
   end
 
   def send_attachment_message(phone_number, message)
-    
+
     attachment = message.attachments.first
     type = %w[image audio video].include?(attachment.file_type) ? attachment.file_type : 'document'
     attachment_url = attachment.download_url
@@ -128,7 +129,7 @@ class Whatsapp::Providers::WhatsappYcloudService < Whatsapp::Providers::BaseServ
   def template_body_parameters(template_info)
     {
       name: template_info[:name],
-      language: {        
+      language: {
         code: template_info[:lang_code]
       },
       components: [{

@@ -66,7 +66,7 @@ gem 'barnes'
 
 ##--- gems for authentication & authorization ---##
 gem 'devise'
-gem 'devise-secure_password', '~> 2.0', git: 'https://github.com/jiacheo/devise-secure_password'
+gem 'devise-secure_password', '~> 2.0', git: 'https://git.taovip.com/ycloud-app/devise-secure_password.git'
 gem 'devise_token_auth'
 # authorization
 gem 'jwt'
@@ -91,7 +91,8 @@ gem 'koala'
 # slack client
 gem 'slack-ruby-client'
 # for dialogflow integrations
-gem 'google-cloud-dialogflow'
+#gem 'google-cloud-dialogflow'
+#gem 'grpc', '~> 1.50.0'
 
 ##-- apm and error monitoring ---#
 gem 'ddtrace'
